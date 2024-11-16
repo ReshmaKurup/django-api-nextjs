@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: myapp-np-service
   labels:
-  app: django-api-nextjs-webapp
+    app: django-api-nextjs-webapp
 spec:
   selector:
     app: django-api-nextjs-webapp
