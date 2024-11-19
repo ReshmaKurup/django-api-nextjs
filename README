@@ -1,0 +1,5 @@
+Launch a VM and install docker,K3S,prometheus and grafana.
+Create Dockerfile in the github repository.Clone the repository and build the image using 'docker build -t <docker_hub repo name/imagename>:tag .' command.
+Run the application inside the container using the command 'docker run -p <host_port>:<container_port> docker_hub repo name/imagename>:tag'
+Create a kubernetes-deploy.yaml file in the github repository and deploy it using the command 'kubectl apply -f <kubernetes-deploy.yaml>'
+Using promQL create dashboards using grafana for monitoring CPU,memory usage, and downtime.
