@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: django-api-nextjs-webapp
-        image: reshma164/django-api-next.js-webapp:latest 
+        image: reshma164/django-api-nextjs-webapp:latest 
         ports:
         - containerPort: 3000
