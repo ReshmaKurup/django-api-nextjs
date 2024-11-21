@@ -26,7 +26,7 @@ jobs:
         run: |
           mkdir -p ~/.kube 
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
-          kubectl config set-cluster default --server=https://13.126.125.44:6443
+          kubectl config set-cluster default --server=https://65.0.74.82:6443
           kubectl config use-context default
 
       - name: Deploy to Kubernetes
