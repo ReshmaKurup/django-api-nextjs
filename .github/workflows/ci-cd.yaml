@@ -24,6 +24,7 @@ jobs:
 
       - name: Set up Kubernetes Context
         run: |
+          mkdir -p ~/.kube 
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
           kubectl config use-context default
 
