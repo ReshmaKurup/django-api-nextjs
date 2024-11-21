@@ -22,6 +22,11 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/django-api-nextjs-webapp:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/django-api-nextjs-webapp:latest
 
+      - name: Set up Kubernetes Context
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
+          kubectl config use-context default
+
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f kubernetes-deployment.yaml
