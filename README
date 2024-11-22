@@ -1,5 +1,6 @@
-Launch a VM and install docker,K3S,prometheus and grafana.
-Create Dockerfile in the github repository.Clone the repository and build the image using 'docker build -t <docker_hub repo name/imagename>:tag .' command.
-Run the application inside the container using the command 'docker run -p <host_port>:<container_port> docker_hub repo name/imagename>:tag'
-Create a kubernetes-deploy.yaml file in the github repository and deploy it using the command 'kubectl apply -f <kubernetes-deploy.yaml>'
-Using promQL create dashboards using grafana for monitoring CPU,memory usage, and downtime.
+Launch a VM and install docker,K3S,prometheus,grafana,node exporter and k6 load testing tool.
+Create a Dockerfile and kubernetes-deploy.yaml file in the github repository.
+Create a .github/workflow directory and create a ci-cd.yaml file in the directory and write the script for autobuild and deployment.
+Access prometheus and grafana through internet.
+Using promQL create dashboards in grafana for monitoring CPU,memory usage, and downtime and create alerts for each.
+Create a load_test.js file in the VM and run it using 'k6 run load_test.js' command.
