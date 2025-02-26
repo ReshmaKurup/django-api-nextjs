@@ -2,7 +2,7 @@ name: CI workflow
 On:
   Push
     branches:
-      - main
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
