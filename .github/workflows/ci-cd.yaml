@@ -3,7 +3,7 @@ name: Deploy to k8s
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
