@@ -1,35 +1,30 @@
-name: CI/CD Pipeline
+name: Deploy to k8s
 
 on:
   push:
     branches:
-      - master  
-  pull_request:
-    branches:
-      - master
+      - main
+
+env:
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-
+  deploy:
+    runs-on: kubernetes
     steps:
-      - name: Checkout Code
-        run: git clone https://github.com/ReshmaKurup/django-api-nextjs.git .
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Build Docker Image
-        run: |
-          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/django-api-nextjs-webapp .
-          docker push ${{ secrets.DOCKER_USERNAME }}/django-api-nextjs-webapp
+    - name: Create Docker Image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
 
-      - name: Set up Kubernetes Context
-        run: |
-          mkdir -p ~/.kube 
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
-          kubectl config set-cluster default --server=https://65.0.74.82:6443
-          kubectl config use-context default
-
-      - name: Deploy to Kubernetes
-        run: |
-         kubectl apply -f kubernetes-deploy.yaml --validate=false
+    - name: Deploy to k8s
+      uses: appleboy/kubectl-action@v1.0.0
+      with:
+        args: apply -f deployment.yaml
+        env:
+          KUBECONFIG: ${{ env.KUBECONFIG }}
         
